@@ -5,6 +5,7 @@ import { createEsbuildPlugin } from "@badeball/cypress-cucumber-preprocessor/esb
 
 export default defineConfig({
   e2e: {
+    baseUrl: "https://bugbank.netlify.app",
     specPattern: "cypress/e2e/features/**/*.feature",
     async setupNodeEvents(
       on: Cypress.PluginEvents,

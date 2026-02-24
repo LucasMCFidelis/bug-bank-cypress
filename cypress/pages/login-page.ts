@@ -22,6 +22,10 @@ class LoginPage {
     return cy.get(loginSelectors.registerButton).contains(/registrar/i);
   }
 
+  public modalText(){
+    return cy.get(loginSelectors.modalText)
+  }
+
   public fillLoginForm({ email, password }: LoginForm<true>) {
     if (email) {
       this.emailInput().type(email);

@@ -10,3 +10,8 @@ Funcionalidade: Login
     E que estou na pagina de login
     Quando submeto o formulário com email e senha validos
     Então devo ser autenticado
+  
+  Cenário: Login com credenciais validas
+    Dado que estou na pagina de login
+    Quando submeto o formulário utilizando credenciais invalidas
+    Então devo visualizar um erro informando que as credenciais são invalidas

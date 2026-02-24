@@ -3,6 +3,7 @@ import { faker } from "@faker-js/faker";
 
 import loginPage from "../../pages/login-page";
 import cadastrePage from "../../pages/cadastre-page";
+import { LOGIN_MESSAGES } from "../../support/constants/messages";
 
 type UserData = {
   email: string;
@@ -40,6 +41,10 @@ When("submeto o formulário com email e senha validos", () => {
   });
 });
 
+When("submeto o formulário utilizando credenciais invalidas", () => {
+  loginPage.submit({ email: "teste@gmail.com", password: "senha#invalida" });
+});
+
 Then("devo ser autenticado", () => {
   cy.getCookie("bugbank-auth").then((cookie) => {
     expect(cookie?.value).equal("true");
@@ -49,3 +54,10 @@ Then("devo ser autenticado", () => {
 Then("redirecionado para pagina principal", () => {
   cy.url().should("include", "/home");
 });
+
+Then(
+  "devo visualizar um erro informando que as credenciais são invalidas",
+  () => {
+    loginPage.modalText().contains(LOGIN_MESSAGES.INVALID_CREDENTIALS);
+  },
+);

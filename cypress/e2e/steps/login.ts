@@ -45,6 +45,18 @@ When("submeto o formulário utilizando credenciais invalidas", () => {
   loginPage.submit({ email: "teste@gmail.com", password: "senha#invalida" });
 });
 
+When(
+  "submeto o formulário de login informando o mesmo email com letras minúsculas",
+  () => {
+    cy.get<UserData>("@user").then((user) => {
+      loginPage.submit({
+        email: user.email.toLowerCase(),
+        password: user.password,
+      });
+    });
+  },
+);
+
 Then("devo ser autenticado", () => {
   cy.getCookie("bugbank-auth").then((cookie) => {
     expect(cookie?.value).equal("true");

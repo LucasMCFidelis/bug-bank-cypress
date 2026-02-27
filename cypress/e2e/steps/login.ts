@@ -1,28 +1,21 @@
 import { When, Then, Given } from "@badeball/cypress-cucumber-preprocessor";
-import { faker } from "@faker-js/faker";
 
 import loginPage from "../../pages/login-page";
 import cadastrePage from "../../pages/cadastre-page";
 import { LOGIN_MESSAGES } from "../../support/constants/messages";
 import { UserData } from "../../support/interfaces/user-data";
+import { userFactory } from "../../factory/user";
 
 Given("que possuo um usuário válido cadastrado", () => {
-  const password = faker.internet.password();
-
-  const userData: UserData = {
-    email: faker.internet.email(),
-    password,
-  };
-
-  cy.wrap(userData).as("user");
+  const userData = userFactory()
 
   cadastrePage.visit();
   cadastrePage.submit({
     forceType: true,
     email: userData.email,
-    name: faker.person.firstName(),
-    password,
-    passwordConfirmation: password,
+    name: userData.name,
+    password: userData.password,
+    passwordConfirmation: userData.password,
   });
 });
 

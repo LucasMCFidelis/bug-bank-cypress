@@ -1,7 +1,9 @@
 import { LoginForm } from "../support/interfaces/login-form";
 import loginSelectors from "../support/selectors/login-selectors";
 
-class LoginPage {
+import { BasePage } from "./base-page";
+
+class LoginPage extends BasePage {
   public visit() {
     cy.visit("/");
   }
@@ -20,10 +22,6 @@ class LoginPage {
 
   public registerButton() {
     return cy.get(loginSelectors.registerButton).contains(/registrar/i);
-  }
-
-  public modalText(){
-    return cy.get(loginSelectors.modalText)
   }
 
   public fillLoginForm({ email, password }: LoginForm<true>) {

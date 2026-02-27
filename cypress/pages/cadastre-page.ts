@@ -1,9 +1,10 @@
 import { CadastreForm } from "../support/interfaces/cadastre-form";
 import cadastreSelectors from "../support/selectors/cadastre-selectors";
 
+import { BasePage } from "./base-page";
 import loginPage from "./login-page";
 
-class CadastrePage {
+class CadastrePage extends BasePage {
   public visit() {
     loginPage.visit();
     loginPage.registerButton().click();
@@ -87,14 +88,6 @@ class CadastrePage {
   public submit(parameters: CadastreForm & { forceType?: boolean }) {
     this.fillCadastreForm(parameters);
     this.cadastreButton().click({ force: parameters.forceType });
-  }
-
-  public modalText() {
-    return cy.get(cadastreSelectors.modalText);
-  }
-
-  public closeModal() {
-    cy.get(cadastreSelectors.closeModalButton).click();
   }
 }
 

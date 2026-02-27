@@ -6,9 +6,6 @@ class CadastrePageSelectors {
   public passwordConfirmationInput = `${this.cadastreCard} input[name='passwordConfirmation']`;
   public toggleAddBalance = `${this.cadastreCard} #toggleAddBalance`;
   public cadastreButton = `${this.cadastreCard} button[type='submit']`;
-  public modalText = "#modalText"
-  public closeModalButton = "#btnCloseModal"
-
 }
 
 export default new CadastrePageSelectors();

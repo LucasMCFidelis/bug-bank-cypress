@@ -3,5 +3,4 @@ export type CadastreForm = {
   name?: string;
   password?: string;
   passwordConfirmation?: string;
-  openingBalance: boolean
 };

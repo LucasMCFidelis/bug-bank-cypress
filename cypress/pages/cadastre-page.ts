@@ -29,8 +29,16 @@ class CadastrePage {
     return cy.get(cadastreSelectors.passwordConfirmationInput);
   }
 
+  public toggleAddBalanceInput() {
+    return cy.get(cadastreSelectors.toggleAddBalance);
+  }
+
   public cadastreButton() {
     return cy.get(cadastreSelectors.cadastreButton);
+  }
+
+  public changeAddBalance() {
+    this.toggleAddBalanceInput().click();
   }
 
   public fillCadastreField({
@@ -79,6 +87,14 @@ class CadastrePage {
   public submit(parameters: CadastreForm & { forceType?: boolean }) {
     this.fillCadastreForm(parameters);
     this.cadastreButton().click({ force: parameters.forceType });
+  }
+
+  public modalText() {
+    return cy.get(cadastreSelectors.modalText);
+  }
+
+  public closeModal() {
+    cy.get(cadastreSelectors.closeModalButton).click();
   }
 }
 

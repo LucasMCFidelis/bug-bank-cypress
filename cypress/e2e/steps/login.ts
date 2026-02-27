@@ -4,11 +4,7 @@ import { faker } from "@faker-js/faker";
 import loginPage from "../../pages/login-page";
 import cadastrePage from "../../pages/cadastre-page";
 import { LOGIN_MESSAGES } from "../../support/constants/messages";
-
-type UserData = {
-  email: string;
-  password: string;
-};
+import { UserData } from "../../support/interfaces/user-data";
 
 Given("que possuo um usuário válido cadastrado", () => {
   const password = faker.internet.password();
@@ -27,7 +23,6 @@ Given("que possuo um usuário válido cadastrado", () => {
     name: faker.person.firstName(),
     password,
     passwordConfirmation: password,
-    openingBalance: false,
   });
 });
 

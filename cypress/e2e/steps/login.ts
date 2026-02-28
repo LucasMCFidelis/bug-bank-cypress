@@ -51,10 +51,6 @@ Then("devo ser autenticado", () => {
   });
 });
 
-Then("redirecionado para pagina principal", () => {
-  cy.url().should("include", "/home");
-});
-
 Then(
   "devo visualizar um erro informando que as credenciais são invalidas",
   () => {

@@ -22,9 +22,9 @@ Given("já existe uma conta cadastrada com o e-mail informado", () => {
   });
 });
 
-When("NÃO seleciono a opção de criar conta com saldo", () => {});
+Given("NÃO seleciono a opção de criar conta com saldo", () => {});
 
-When("seleciono a opção de criar conta com saldo", () => {
+Given("seleciono a opção de criar conta com saldo", () => {
   cadastrePage.changeAddBalance();
 });
 
@@ -41,7 +41,7 @@ When("submeto o formulário de cadastro com dados válidos", () => {
 });
 
 When("submeto o formulário utilizando um e-mail já cadastrado", () => {
-  cadastrePage.visit()
+  cadastrePage.visit();
   cy.get<UserData>("@user").then((user) => {
     cadastrePage.submit({
       forceType: true,
@@ -59,19 +59,27 @@ Then("minha conta deve ser criada", () => {
 });
 
 Then("deve ser exibida uma mensagem informando o conflito", () => {
-  cadastrePage.modalText().should("be.visible").contains(REGISTER_MESSAGES.EMAIL_CONFLICT);
+  cadastrePage
+    .modalText()
+    .should("be.visible")
+    .contains(REGISTER_MESSAGES.EMAIL_CONFLICT);
   cadastrePage.closeModal();
 });
 
-Then("os dados informados devem permanecer preenchidos no formulário de cadastro", () => {
-  cy.get<UserData>("@user").then((user) => {
-    cadastrePage.emailInput().should("have.value", user.email)
-    cadastrePage.nameInput().should("have.value", user.name)
-    cadastrePage.passwordInput().should("have.value", user.password)
-    cadastrePage.passwordConfirmationInput().should("have.value", user.password)
-  });
-});
+Then(
+  "os dados informados devem permanecer preenchidos no formulário de cadastro",
+  () => {
+    cy.get<UserData>("@user").then((user) => {
+      cadastrePage.emailInput().should("have.value", user.email);
+      cadastrePage.nameInput().should("have.value", user.name);
+      cadastrePage.passwordInput().should("have.value", user.password);
+      cadastrePage
+        .passwordConfirmationInput()
+        .should("have.value", user.password);
+    });
+  },
+);
 
-Then("devo estar sem saldo", () => {
-  homePage.textBalance().contains("R$ 0,00");
+Then("meu saldo inicial deve ser de {int}", (valor: number) => {
+  homePage.validateBalance(valor)
 });

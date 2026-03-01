@@ -39,7 +39,7 @@ class CadastrePage extends BasePage {
   }
 
   public changeAddBalance() {
-    this.toggleAddBalanceInput().click();
+    this.toggleAddBalanceInput().click({ force: true });
   }
 
   public fillCadastreField({

@@ -5,6 +5,7 @@ import homePage from "../../pages/home-page";
 import { userFactory } from "../../factory/user";
 import { UserData } from "../../support/interfaces/user-data";
 import { REGISTER_MESSAGES } from "../../support/constants/messages";
+import loginPage from "../../pages/login-page";
 
 Given("que estou na página de cadastro", () => {
   cadastrePage.visit();
@@ -81,5 +82,12 @@ Then(
 );
 
 Then("meu saldo inicial deve ser de {int}", (valor: number) => {
-  homePage.validateBalance(valor)
+  cy.getCookie("bugbank-auth").then((cookie) => {
+    if (!cookie) {
+      cy.get<UserData>("@user").then((user) => {
+        loginPage.submit(user);
+      });
+    }
+  });
+  homePage.validateBalance(valor);
 });

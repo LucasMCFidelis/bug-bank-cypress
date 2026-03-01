@@ -10,7 +10,7 @@ Funcionalidade: Login
     E que estou na pagina de login
     Quando submeto o formulário com email e senha validos
     Então devo ser autenticado
-    E redirecionado para pagina principal
+    E devo ser redirecionado para pagina principal
   
   Cenário: Login com credenciais invalidas
     Dado que estou na pagina de login
@@ -22,4 +22,4 @@ Funcionalidade: Login
     E que estou na pagina de login
     Quando submeto o formulário de login informando o mesmo email com letras minúsculas
     Então devo ser autenticado
-    E redirecionado para pagina principal
+    E devo ser redirecionado para pagina principal

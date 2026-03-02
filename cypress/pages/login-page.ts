@@ -1,4 +1,5 @@
 import { LoginForm } from "../support/interfaces/login-form";
+import { UserData } from "../support/interfaces/user-data";
 import loginSelectors from "../support/selectors/login-selectors";
 
 import { BasePage } from "./base-page";
@@ -45,6 +46,17 @@ class LoginPage extends BasePage {
   public submit(credentials: LoginForm<true>) {
     this.fillLoginForm({ ...credentials });
     this.loginButton().click();
+  }
+
+  public ensureUserLogged(tag: string = "user") {
+    cy.getCookie("bugbank-auth").then((cookie) => {
+      if (!cookie) {
+        cy.get<UserData>(`@${tag}`).then((user) => {
+          this.visit();
+          this.submit(user);
+        });
+      }
+    });
   }
 }
 

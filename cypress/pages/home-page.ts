@@ -3,6 +3,10 @@ import homeSelectors from "../support/selectors/home-selectors";
 import { BasePage } from "./base-page";
 
 class HomePage extends BasePage {
+  public visit() {
+    cy.visit("/home");
+  }
+
   public validatePage() {
     cy.url().should("include", "/home");
     this.accountNumber().should("be.visible");
@@ -20,8 +24,7 @@ class HomePage extends BasePage {
     this.balanceValue()
       .invoke("text")
       .then((text) => {
-        console.log(text);
-        const numeric = Number(text.replace(/\D/g, ""));
+        const numeric = this.extractBalanceValueInCents(text)
         expect(numeric).to.eq(expectedValue * 100);
       });
   }

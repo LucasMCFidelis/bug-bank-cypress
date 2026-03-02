@@ -82,12 +82,6 @@ Then(
 );
 
 Then("meu saldo inicial deve ser de {int}", (valor: number) => {
-  cy.getCookie("bugbank-auth").then((cookie) => {
-    if (!cookie) {
-      cy.get<UserData>("@user").then((user) => {
-        loginPage.submit(user);
-      });
-    }
-  });
+  loginPage.ensureUserLogged()
   homePage.validateBalance(valor);
 });

@@ -100,14 +100,36 @@ When(
 When(
   "submeto o formulário informando um valor negativo para a transferência",
   () => {
-    cy.get<AccountData>("@userAddresseeAccount").then((userAddresseeAccount) => {
-      transferPage.submit({
-        accountNumber: userAddresseeAccount.accountNumber,
-        accountDigit: userAddresseeAccount.accountDigit,
-        transferValue: -200,
-        description: "teste transferência negativa",
-      });
-    });
+    cy.get<AccountData>("@userAddresseeAccount").then(
+      (userAddresseeAccount) => {
+        transferPage.submit({
+          accountNumber: userAddresseeAccount.accountNumber,
+          accountDigit: userAddresseeAccount.accountDigit,
+          transferValue: -200,
+          description: "teste transferência negativa",
+        });
+      },
+    );
+  },
+);
+
+When(
+  "submeto o formulário informando um valor maior que o saldo disponível",
+  () => {
+    cy.get<AccountData>("@userAddresseeAccount").then(
+      (userAddresseeAccount) => {
+        cy.get<number>("@beforeTransferBalanceInCents").then(
+          (beforeTransferBalanceInCents) => {
+            transferPage.submit({
+              accountNumber: userAddresseeAccount.accountNumber,
+              accountDigit: userAddresseeAccount.accountDigit,
+              transferValue: beforeTransferBalanceInCents / 100 + 1,
+              description: "teste transferência valor superior ao saldo",
+            });
+          },
+        );
+      },
+    );
   },
 );
 

@@ -24,7 +24,7 @@ Funcionalidade: Transferência
     Dado que estou autenticado em uma conta com saldo disponível
     E que acesso a página de transferência
     Quando submeto o formulário informando os dados da minha própria conta como destino
-    Então deve ser exibida a mensagem "Não pode transferir pra mesmo conta"
+    Então deve ser exibida a mensagem "Não pode transferir pra mesma conta"
     E o valor do meu saldo deve se manter inalterado
   
   Cenário: Transferência com valor negativo
@@ -35,3 +35,10 @@ Funcionalidade: Transferência
     Então deve ser exibida a mensagem "Valor da transferência não pode ser 0 ou negativo"
     E o valor do meu saldo deve se manter inalterado
   
+  Cenário: Transferência com valor superior ao saldo disponível
+    Dado que possuo número e dígito de uma conta para onde será realizada a transferência 
+    E que estou autenticado em uma conta com saldo disponível
+    E que acesso a página de transferência
+    Quando submeto o formulário informando um valor maior que o saldo disponível
+    Então deve ser exibida a mensagem "Você não tem saldo suficiente para essa transação"
+    E o valor do meu saldo deve se manter inalterado

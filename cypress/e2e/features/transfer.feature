@@ -25,4 +25,13 @@ Funcionalidade: Transferência
     E que acesso a página de transferência
     Quando submeto o formulário informando os dados da minha própria conta como destino
     Então deve ser exibida a mensagem "Não pode transferir pra mesmo conta"
-    E o valor não deve ser debitado do meu saldo
+    E o valor do meu saldo deve se manter inalterado
+  
+  Cenário: Transferência com valor negativo
+    Dado que possuo número e dígito de uma conta para onde será realizada a transferência 
+    E que estou autenticado em uma conta com saldo disponível
+    E que acesso a página de transferência
+    Quando submeto o formulário informando um valor negativo para a transferência
+    Então deve ser exibida a mensagem "Valor da transferência não pode ser 0 ou negativo"
+    E o valor do meu saldo deve se manter inalterado
+  

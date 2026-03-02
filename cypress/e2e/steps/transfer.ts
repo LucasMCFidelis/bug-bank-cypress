@@ -97,6 +97,20 @@ When(
   },
 );
 
+When(
+  "submeto o formulário informando um valor negativo para a transferência",
+  () => {
+    cy.get<AccountData>("@userAddresseeAccount").then((userAddresseeAccount) => {
+      transferPage.submit({
+        accountNumber: userAddresseeAccount.accountNumber,
+        accountDigit: userAddresseeAccount.accountDigit,
+        transferValue: -200,
+        description: "teste transferência negativa",
+      });
+    });
+  },
+);
+
 Then("deve ser exibida a mensagem {string}", (message: string) => {
   transferPage.modalText().should("be.visible").and("contain.text", message);
 });
@@ -112,7 +126,7 @@ Then("o valor transferido deve ser debitado do meu saldo", () => {
   );
 });
 
-Then("o valor não deve ser debitado do meu saldo", () => {
+Then("o valor do meu saldo deve se manter inalterado", () => {
   homePage.visit();
   cy.get<number>("@beforeTransferBalanceInCents").then(
     (beforeTransferBalanceInCents) => {

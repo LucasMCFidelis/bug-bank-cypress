@@ -17,5 +17,5 @@ Funcionalidade: Transferência
     E que estou autenticado em uma conta com saldo disponível
     E que acesso a página de transferência
     Quando submeto o formulário informando uma conta de destino válida, valor válido e descrição válida
-    Então deve ser exibida a mensagem "Transferencia realizada com sucesso"
+    Então deve ser exibida a mensagem "Transferência realizada com sucesso"
     E o valor transferido deve ser debitado do meu saldo

@@ -24,7 +24,7 @@ class HomePage extends BasePage {
     this.balanceValue()
       .invoke("text")
       .then((text) => {
-        const numeric = this.extractBalanceValueInCents(text)
+        const numeric = this.extractBalanceValueInCents(text);
         expect(numeric).to.eq(expectedValue * 100);
       });
   }

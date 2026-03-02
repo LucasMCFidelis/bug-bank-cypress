@@ -1,5 +1,5 @@
-class  BankStatementSelectors {
+class BankStatementSelectors {
   public balanceValue = "#textBalanceAvailable";
 }
 
-export default new  BankStatementSelectors();
+export default new BankStatementSelectors();

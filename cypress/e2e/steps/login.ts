@@ -7,7 +7,7 @@ import { UserData } from "../../support/interfaces/user-data";
 import { userFactory } from "../../factory/user";
 
 Given("que possuo um usuário válido cadastrado", () => {
-  const userData = userFactory()
+  const userData = userFactory();
 
   cadastrePage.visit();
   cadastrePage.submit({

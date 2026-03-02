@@ -5,9 +5,9 @@ import { BasePage } from "./base-page";
 import loginPage from "./login-page";
 
 class CadastrePage extends BasePage {
-  public validatePage(){
+  public validatePage() {
     cy.url().should("include", "/");
-    this.cadastreCard().should("be.visible")
+    this.cadastreCard().should("be.visible");
   }
 
   public visit() {

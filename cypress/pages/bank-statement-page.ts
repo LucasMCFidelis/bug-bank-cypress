@@ -3,7 +3,7 @@ import bankStatementSelectors from "../support/selectors/bank-statement-selector
 import { BasePage } from "./base-page";
 
 class BankStatementPage extends BasePage {
-  public validatePage(){
+  public validatePage() {
     cy.url().should("include", "/bank-statement");
     this.balanceValue().should("be.visible");
   }

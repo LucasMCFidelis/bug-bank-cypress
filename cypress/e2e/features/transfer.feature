@@ -42,3 +42,10 @@ Funcionalidade: Transferência
     Quando submeto o formulário informando um valor maior que o saldo disponível
     Então deve ser exibida a mensagem "Você não tem saldo suficiente para essa transação"
     E o valor do meu saldo deve se manter inalterado
+
+  Cenário: Transferência sem informar dados da conta de destino
+    Dado que estou autenticado em uma conta com saldo disponível
+    E que acesso a página de transferência
+    Quando submeto o formulário sem informar número e dígito da conta de destino
+    E deve ser exibida a mensagem "Número e digito da conta de destino são obrigatórios"
+    E o valor do meu saldo deve se manter inalterado

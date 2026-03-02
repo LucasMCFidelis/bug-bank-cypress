@@ -133,6 +133,16 @@ When(
   },
 );
 
+When(
+  "submeto o formulário sem informar número e dígito da conta de destino",
+  () => {
+    transferPage.submit({
+      transferValue: 100,
+      description: "teste transferência sem dados mínimos do destino",
+    });
+  },
+);
+
 Then("deve ser exibida a mensagem {string}", (message: string) => {
   transferPage.modalText().should("be.visible").and("contain.text", message);
 });

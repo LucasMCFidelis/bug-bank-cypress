@@ -19,3 +19,10 @@ Funcionalidade: Transferência
     Quando submeto o formulário informando uma conta de destino válida, valor válido e descrição válida
     Então deve ser exibida a mensagem "Transferência realizada com sucesso"
     E o valor transferido deve ser debitado do meu saldo
+
+  Cenário: Tentativa de transferência para a própria conta
+    Dado que estou autenticado em uma conta com saldo disponível
+    E que acesso a página de transferência
+    Quando submeto o formulário informando os dados da minha própria conta como destino
+    Então deve ser exibida a mensagem "Não pode transferir pra mesmo conta"
+    E o valor não deve ser debitado do meu saldo

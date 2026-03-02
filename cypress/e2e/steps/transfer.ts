@@ -45,6 +45,14 @@ Given("que estou autenticado em uma conta com saldo disponível", () => {
     passwordConfirmation: userData.password,
   });
 
+  cadastrePage
+    .modalText()
+    .invoke("text")
+    .then((text) => {
+      cadastrePage.extractDataAccountToText(text, "userSenderAccount");
+    });
+  cadastrePage.closeModal();
+
   loginPage.ensureUserLogged("userSender");
 
   homePage
@@ -75,8 +83,22 @@ When(
   },
 );
 
+When(
+  "submeto o formulário informando os dados da minha própria conta como destino",
+  () => {
+    cy.get<AccountData>("@userSenderAccount").then((userSenderAccount) => {
+      transferPage.submit({
+        accountNumber: userSenderAccount.accountNumber,
+        accountDigit: userSenderAccount.accountDigit,
+        transferValue: 1,
+        description: "teste auto transferência",
+      });
+    });
+  },
+);
+
 Then("deve ser exibida a mensagem {string}", (message: string) => {
-  transferPage.modalText().should("be.visible").contains(message);
+  transferPage.modalText().should("be.visible").and("contain.text", message);
 });
 
 Then("o valor transferido deve ser debitado do meu saldo", () => {
@@ -86,6 +108,15 @@ Then("o valor transferido deve ser debitado do meu saldo", () => {
       const expectedBalanceInCents = beforeTransferBalanceInCents - 100;
 
       homePage.validateBalance(expectedBalanceInCents / 100);
+    },
+  );
+});
+
+Then("o valor não deve ser debitado do meu saldo", () => {
+  homePage.visit();
+  cy.get<number>("@beforeTransferBalanceInCents").then(
+    (beforeTransferBalanceInCents) => {
+      homePage.validateBalance(beforeTransferBalanceInCents / 100);
     },
   );
 });

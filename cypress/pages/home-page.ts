@@ -28,6 +28,14 @@ class HomePage extends BasePage {
         expect(numeric).to.eq(expectedValue * 100);
       });
   }
+
+  public logoutButton() {
+    return cy.get(homeSelectors.logoutButton)
+  }
+
+  public logout(){
+    this.logoutButton().click()
+  }
 }
 
 export default new HomePage();

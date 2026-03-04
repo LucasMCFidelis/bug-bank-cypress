@@ -83,5 +83,5 @@ Then(
 
 Then("meu saldo inicial deve ser de {int}", (valor: number) => {
   loginPage.ensureUserLogged();
-  homePage.validateBalance(valor);
+  homePage.validateBalance(homePage.balanceValue(), valor);
 });

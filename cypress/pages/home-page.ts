@@ -20,15 +20,6 @@ class HomePage extends BasePage {
     return cy.get(homeSelectors.balanceValue);
   }
 
-  public validateBalance(expectedValue: number) {
-    this.balanceValue()
-      .invoke("text")
-      .then((text) => {
-        const numeric = this.extractBalanceValueInCents(text);
-        expect(numeric).to.eq(expectedValue * 100);
-      });
-  }
-
   public logoutButton() {
     return cy.get(homeSelectors.logoutButton)
   }

@@ -41,4 +41,14 @@ export abstract class BasePage {
     const numericValue = this.extractBalanceValueInCents(textValue);
     cy.wrap(numericValue).as(tag);
   }
+
+  public validateBalance(
+    element: Cypress.Chainable<JQuery<HTMLElement>>,
+    expectedValue: number,
+  ) {
+    element.invoke("text").then((text) => {
+      const numeric = this.extractBalanceValueInCents(text);
+      expect(numeric).to.eq(expectedValue * 100);
+    });
+  }
 }

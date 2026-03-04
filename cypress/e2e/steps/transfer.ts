@@ -153,7 +153,10 @@ Then("o valor transferido deve ser debitado do meu saldo", () => {
     (beforeTransferBalanceInCents) => {
       const expectedBalanceInCents = beforeTransferBalanceInCents - 100;
 
-      homePage.validateBalance(expectedBalanceInCents / 100);
+      homePage.validateBalance(
+        homePage.balanceValue(),
+        expectedBalanceInCents / 100,
+      );
     },
   );
 });
@@ -162,7 +165,10 @@ Then("o valor do meu saldo deve se manter inalterado", () => {
   homePage.visit();
   cy.get<number>("@beforeTransferBalanceInCents").then(
     (beforeTransferBalanceInCents) => {
-      homePage.validateBalance(beforeTransferBalanceInCents / 100);
+      homePage.validateBalance(
+        homePage.balanceValue(),
+        beforeTransferBalanceInCents / 100,
+      );
     },
   );
 });
